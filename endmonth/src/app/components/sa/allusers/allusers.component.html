@@ -1,0 +1,60 @@
+<div class="main">
+    <app-navbar></app-navbar>
+    <button routerLink="" class="menu-item">Home</button>
+    <button routerLink="/events" class="menu-item">Events</button>
+    <button class="menu-item">Analytics</button>
+  
+    <div class="table-container">
+      <h2>Users</h2>
+      <table class="users-table">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Permissions</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.role }}</td>
+            <td>
+              <div class="permissions-dropdown">
+                <label>
+                  <input type="checkbox" [(ngModel)]="user.permissions.notify" />
+                  Allow to Notify
+                </label>
+                <label>
+                  <input type="checkbox" [(ngModel)]="user.permissions.delete" />
+                  Allow to Delete
+                </label>
+              </div>
+            </td>
+            <td>
+              <button class="delete-btn" (click)="confirmDelete(user)">
+                <i class="fa fa-trash"></i>
+              </button>
+              <button class="notify-btn" *ngIf="user.permissions.notify">
+                <i class="fa fa-bell"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Delete Confirmation Modal -->
+    <div class="modal" *ngIf="isDeleteConfirmationVisible">
+      <div class="modal-content">
+        <p>Are you sure you want to delete this user?</p>
+        <div class="modal-buttons">
+          <button class="confirm-btn" (click)="deleteConfirmed()">Yes</button>
+          <button class="cancel-btn" (click)="cancelDelete()">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

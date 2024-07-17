@@ -1,0 +1,43 @@
+### Create Event
+
+POST http://localhost:3000/event/create
+Content-Type: application/json
+
+{
+  "title": "Kanye Event",
+  "description": "This is a sample event",
+  "date": "2024-07-16T12:00:00.000Z",
+  "time": "2024-07-16T14:00:00.000Z",
+  "location": "Sample Location",
+  "ticketTypes": "VIP, Regular",
+  "no_tickets":2,
+  "pricing": 50.00,
+  "managerId": "5984144e-d067-4225-9e59-1969485455bf"
+}
+
+
+### Get All Events
+
+GET http://localhost:3000/event/all
+
+
+###Get Event by ID
+
+GET http://localhost:3000/event/getone/
+
+
+###Update Event
+
+PUT http://localhost:3000/event/update/
+Content-Type: application/json
+
+{
+  "title": "Updated Event"
+}
+
+### Delete Event
+
+DELETE http://localhost:3000/event/delete/
+
+
+

@@ -1,0 +1,60 @@
+### User Registration
+POST http://localhost:3000/user/register
+Content-Type: application/json
+
+{
+  "name": "Charity doe",
+  "email": "charitynyawirairungu@gmail.com",
+  "password": "charity1234!",
+  "role": "manager"
+}
+
+### User Login
+POST http://localhost:3000/user/login
+Content-Type: application/json
+
+{
+  "email": "charitynyawirairungu@gmail.com",
+  "password": "charity1234!"
+}
+
+### Forgot Password
+POST http://localhost:3000/user/forgot-password
+Content-Type: application/json
+
+{
+  "email": "charitynyawirairungu@gmail.com"
+}
+
+### Verify Reset Code
+POST http://localhost:3000/user/verify-reset-code
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "code": "123456"
+}
+
+### Reset Password
+POST http://localhost:3000/user/reset-password
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "newPassword": "NewPassword123!"
+}
+
+### Book Ticket
+POST http://localhost:3000/user/book-ticket
+Content-Type: application/json
+
+{
+  "userId": "user-id",
+  "eventId": "event-id",
+  "ticketType": "single",
+  "howmany": 2
+}
+
+### Get All Users
+GET http://localhost:3000/user/users
+

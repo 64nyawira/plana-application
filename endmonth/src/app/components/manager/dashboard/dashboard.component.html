@@ -1,0 +1,97 @@
+<div class="main">
+  <div class="nav">
+    <app-navbar></app-navbar>
+  </div>
+
+  <button routerLink="" class="menu-item">home</button>
+  <button class="menu-item" (click)="showForm()">create</button>
+  <button routerLink="/usertbl" class="menu-item">users</button>
+  <button class="menu-item" (click)="showNotificationForm()"> Create a Notification </button>
+
+  <div *ngIf="isDeleteConfirmationVisible" class="delete-confirmation">
+    <p>Are you sure you want to delete this event?</p>
+    <button (click)="deleteEventConfirmed()">Yes</button>
+    <button (click)="cancelDelete()">No</button>
+  </div>
+
+  <div class="form-container" *ngIf="isNotificationFormVisible">
+    <form (ngSubmit)="sendNotification(notificationForm)" #notificationForm="ngForm">
+      <h3 style="color: black;">Send a Notification to the Attendees</h3>
+      <label for="notificationMessage">Message:</label>
+      <textarea id="notificationMessage" name="notificationMessage" ngModel required></textarea>
+      
+      <div class="bttns">
+        <button type="button" (click)="hideNotificationForm()">Cancel</button>
+        <button type="submit">Send</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="event-table">
+    <h2>Events</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Location</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let event of recommendedEvents">
+          <td><img [src]="event.image" alt="{{ event.title }}" /></td>
+          <td>{{ event.title }}</td>
+          <td>{{ event.description }}</td>
+          <td>{{ event.price }}</td>
+          <td>{{ event.location }}</td>
+          <td>
+            <button (click)="updateEvent(event.id)"><i class="fas fa-edit"></i></button>
+            <button (click)="confirmDelete(event)"><i class="fas fa-trash"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+<div class="form-container" *ngIf="isFormVisible">
+  <form (ngSubmit)="onSubmit(eventForm)" #eventForm="ngForm">
+    <h2>{{ isUpdateMode ? 'Update' : 'Create' }} Event</h2>
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" ngModel required [value]="selectedEvent?.title || ''">
+    
+    <label for="description">Short Description:</label>
+    <textarea id="description" name="description" ngModel required>{{ selectedEvent?.description || '' }}</textarea>
+    
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date" ngModel required [value]="selectedEvent?.date || ''">
+    
+    <label for="location">Location:</label>
+    <input type="text" id="location" name="location" ngModel required [value]="selectedEvent?.location || ''">
+    
+    <label for="ticketType">Type of Tickets:</label>
+    <select id="ticketType" name="ticketType" [(ngModel)]="ticketType" required>
+      <option value="single">Single</option>
+      <option value="group">Group</option>
+    </select>
+    
+    <div *ngIf="ticketType === 'group'">
+      <label for="peoplePerTicket">How many people per ticket?</label>
+      <input type="number" id="peoplePerTicket" name="peoplePerTicket" ngModel [value]="selectedEvent?.peoplePerTicket || ''">
+    </div>
+    
+    <label for="price">Price per Ticket:</label>
+    <input type="number" id="price" name="price" ngModel required [value]="selectedEvent?.price || ''">
+    
+   <div class="bttns">
+    <button type="button" (click)="hideForm()">Cancel</button>
+    <button type="submit">{{ isUpdateMode ? 'Update' : 'Add' }}</button>
+   </div>
+   
+  </form>
+</div>
+
+<app-footer></app-footer>

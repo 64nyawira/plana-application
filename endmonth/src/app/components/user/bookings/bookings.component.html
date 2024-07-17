@@ -1,0 +1,35 @@
+<div class="main">
+
+  <app-sidebar></app-sidebar>
+  <div class="table-container">
+    <h2>Bookings</h2>
+    <table class="bookings-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Tickets</th>
+          <th>Amount</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let booking of bookings">
+          <td>{{ booking.title }}</td>
+          <td>{{ booking.tickets }}</td>
+          <td>{{ booking.amount }}</td>
+          <td>{{booking.date}}</td>
+          <td>{{ booking.status }}</td>
+          <td>
+            <button class="cancel" *ngIf="booking.status === 'Pending'" (click)="cancelBooking(booking)">Cancel</button>
+            <button class="delete" *ngIf="booking.status === 'Confirmed'" (click)="deleteBooking(booking)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+  <app-footer></app-footer>
+  
