@@ -20,4 +20,6 @@ export class RecommendedEventsComponent implements OnInit {
   viewEvent(id: number): void {
     this.router.navigate(['/item', id]);
   }
+
+  
 }
